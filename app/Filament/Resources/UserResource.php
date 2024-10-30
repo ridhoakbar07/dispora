@@ -26,7 +26,7 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 9;
 
-    protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function getNavigationLabel(): string
     {
@@ -46,6 +46,7 @@ class UserResource extends Resource
     public static function getNavigationGroup(): ?string
     {
         return config('filament-users.group');
+        // return "Filament Shield";
     }
 
     public function getTitle(): string
