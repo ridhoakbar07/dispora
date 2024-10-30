@@ -17,7 +17,6 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -55,8 +54,10 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugin(
-                FilamentMediaManagerPlugin::make(),
+            ->plugins([
+                \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                ]
             );
     }
 }
