@@ -13,7 +13,8 @@
         "laravel/framework": "^11.9",
         "laravel/pulse": "^1.2",
         "laravel/tinker": "^2.9",
-        "tomatophp/filament-media-manager": "^1.1"
+        "tomatophp/filament-media-manager": "^1.1",
+        "tomatophp/filament-users": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
