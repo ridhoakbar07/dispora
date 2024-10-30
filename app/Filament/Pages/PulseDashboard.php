@@ -26,9 +26,9 @@ class PulseDashboard extends Page
 
     protected static ?string $title = 'Laravel Pulse';
 
-    protected static ?string $navigationLabel = 'Diagnose';
+    protected static ?string $navigationLabel = 'Laravel Pulse';
 
-    protected static ?string $navigationGroup = 'Utility';
+    protected static ?string $navigationGroup = 'Monitoring';
 
     public function getHeaderWidgetsColumns(): int|array
     {
