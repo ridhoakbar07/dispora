@@ -54,6 +54,12 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->navigationGroups([
+                'Blog',
+                'Content',
+                'User Management',
+                'Monitoring',
+            ])
             ->plugins([
                 \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
                 \TomatoPHP\FilamentUsers\FilamentUsersPlugin::make(),
