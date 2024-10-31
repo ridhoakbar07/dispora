@@ -57,6 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make(),
                 \TomatoPHP\FilamentUsers\FilamentUsersPlugin::make(),
+                \Firefly\FilamentBlog\Blog::make(),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
                 ]
             );

@@ -30,6 +30,8 @@ class PulseDashboard extends Page
 
     protected static ?string $navigationGroup = 'Monitoring';
 
+    protected static ?int $navigationSort = 10;
+
     public function getHeaderWidgetsColumns(): int|array
     {
         return 12;
