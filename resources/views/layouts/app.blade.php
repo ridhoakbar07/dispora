@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark scroll-smooth focus:scroll-auto" >
 
 <head>
     <meta charset="utf-8">
@@ -12,6 +12,13 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <style>
+        /* Tambahkan style untuk transisi */
+        .navbar {
+            transition: all 0.3s ease;
+        }
+    </style>
+
     <script>
         // On page load or when changing themes, best to add inline in `head` to avoid FOUC
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -21,6 +28,28 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
+<script>
+    // JavaScript untuk menambahkan kelas saat di-scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        const logo = navbar.querySelector('img');
+        const title = document.getElementById('website-title');
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow-lg', 'border-gray-400/50', 'bg-opacity-70');
+            title.classList.add('scale-110', 'animate-bounce', 'bg-blue-100', 'text-blue-800', 'me-2', 'px-2.5', 'py-0.5', 'rounded', 'dark:bg-blue-900', 'dark:text-blue-300'); // Efek grow pada teks
+        } else {
+            navbar.classList.remove('shadow-lg', 'border-gray-400/50', 'bg-opacity-50');
+            title.classList.remove('scale-110', 'animate-bounce', 'bg-blue-100', 'text-blue-800', 'me-2', 'px-2.5', 'py-0.5', 'rounded', 'dark:bg-blue-900', 'dark:text-blue-300'); // Mengembalikan ukuran teks
+        }
+    });
+
+    // JavaScript untuk toggle menu mobile
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        const menu = document.querySelector('.md\\:flex');
+        menu.classList.toggle('hidden');
+    });
+</script>
 
     @stack('styles')
 </head>

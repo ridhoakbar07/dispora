@@ -91,6 +91,44 @@
             </div>
         </div>
 
+        <div class="w-full mx-auto max-w-screen-xl p-2 flex justify-center">
+            <div class="relative overflow-hidden rounded bg-gray-200 rounded-lg shadow m-2 dark:bg-gray-900 px-4 py-2 text-black dark:text-white flex items-center justify-between w-full max-w-3xl">
+                <!-- Text section - 50% width -->
+                <div class="w-1/2 pr-4">
+                    <div class="mb-3 text-xl font-semibold">
+                        Subscribe to our Newsletter
+                    </div>
+                    <p class="mb-1 block text-slate-500">
+                        Subscribe to our mailing list to receive daily updates direct to your inbox!
+                    </p>
+                </div>
+                <!-- Input section - 50% width -->
+                <div class="w-1/2">
+                    <form method="post" action="{{ route('filamentblog.post.subscribe') }}">
+                        @csrf
+                        <label hidden for="email-address">Email</label>
+                        @error('email')
+                            <span class="text-xs text-red-500">{{ $message }}</span>
+                        @enderror
+                        <div class="relative">
+                            <input autocomplete="email"
+                                class="flex w-full items-center justify-between rounded-xl border bg-white px-6 py-5 font-medium text-black outline-none placeholder:text-black"
+                                name="email" value="{{ old('email') }}" placeholder="Enter your email" type="email">
+                            <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-primary h-8 w-8" viewBox="0 0 256 256">
+                                    <path fill="currentColor"
+                                        d="m220.24 132.24l-72 72a6 6 0 0 1-8.48-8.48L201.51 134H40a6 6 0 0 1 0-12h161.51l-61.75-61.76a6 6 0 0 1 8.48-8.48l72 72a6 6 0 0 1 0 8.48" />
+                                </svg>
+                            </button>
+                        </div>
+                        @if (session('success'))
+                            <span class="text-green-500">{{ session('success') }}</span>
+                        @endif
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- Bottom Footer -->
         <hr class="my-6 border-gray-300 sm:mx-auto dark:border-gray-700 lg:my-4" />
         <div class="bg-gray-200 rounded-lg shadow m-2 dark:bg-gray-700">
@@ -117,4 +155,5 @@
                 </div>
             </div>
         </div>
+
 </footer>

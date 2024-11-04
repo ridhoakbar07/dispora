@@ -18,7 +18,7 @@ return [
         'prefix' => 'fblog_', // prefix for all blog tables
     ],
     'route' => [
-        // 'prefix' => 'blog',
+        'prefix' => 'blog',
         'middleware' => ['web'],
         //        'home' => [
         //            'name' => 'filamentblog.home',
@@ -38,8 +38,8 @@ return [
     ],
     'seo' => [
         'meta' => [
-            'title' => 'Filament Blog',
-            'description' => 'This is filament blog seo meta description',
+            'title' => 'Dispora Blog',
+            'description' => 'Blog Resmi Dinas Kepemudaan dan Olahraga Provinsi Kalimantan Selatan',
             'keywords' => [],
         ],
     ],

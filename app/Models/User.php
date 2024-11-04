@@ -53,4 +53,10 @@ class User extends Authenticatable
     public function isSuperAdmin(): Collection {
         return User::role('super_admin')->get();
     }
+
+    public function canComment(): bool
+    {
+        // your conditional logic here
+        return false;
+    }
 }
