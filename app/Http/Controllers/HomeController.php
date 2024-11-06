@@ -11,9 +11,23 @@ class HomeController extends Controller
         return view('pages.home');
     }
 
-    public function kontak()
+    public function kontakKami()
     {
         return view('pages.kontak-kami');
     }
 
+    public function visiMisi()
+    {
+        return view('pages.visi-misi');
+    }
+
+    public function tujuanSasaran()
+    {
+        return view('pages.tujuan-sasaran');
+    }
+
+    public function strukturOrganisasi()
+    {
+        return view('pages.struktur-organisasi');
+    }
 }
