@@ -54,10 +54,10 @@
                                         <form action="{{ route('filament.admin.auth.logout') }}" method="POST"
                                             class="inline">
                                             @csrf <!-- CSRF protection is necessary for POST requests -->
-                                            <button type="submit"
-                                                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hidden sm:block">
+                                            <a href="javascript:void(0);" onclick="this.closest('form').submit()"
+                                                class="block px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                                 Logout
-                                            </button>
+                                            </a>
                                         </form>
                                     </li>
                                 </ul>
