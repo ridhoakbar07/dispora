@@ -41,7 +41,14 @@ return new class extends Migration
 
         Schema::create('web_profiles', function (Blueprint $table) {
             $table->id();
-            $table->json('meta');
+            $table->string('nama_skpd')->nullable();
+            $table->string('alias_skpd')->nullable();
+            $table->string(column: 'telp')->nullable();
+            $table->string(column: 'email')->nullable();
+            $table->json(column: 'sosmed')->nullable();
+            $table->text('visi_misi')->nullable();
+            $table->text('tujuan_sasaran')->nullable();
+            $table->string('struktur_organisasi')->nullable();
             $table->timestamps();
         });
     }

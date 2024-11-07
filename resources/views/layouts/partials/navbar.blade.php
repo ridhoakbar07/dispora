@@ -7,7 +7,7 @@
             <img src="{{ asset('storage/images/logo-kalsel.png') }}" class="h-10 transition-transform transform"
                 alt="Dispora Logo" />
             <span id="website-title"
-                class="self-center text-2xl font-bold whitespace-nowrap dark:text-white transition-transform transform">DISPORA</span>
+                class="self-center text-2xl font-bold whitespace-nowrap dark:text-white transition-transform transform bg-blue-100 text-blue-800 me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">DISPORA</span>
         </a>
 
         <div class="flex md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse">
@@ -40,10 +40,10 @@
                     @auth
                         <div class="relative">
                             <button id="avatarDropdownLink" data-dropdown-toggle="avatarDropdown"
-                                class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full">
+                                class="flex items-center border-2 border-gray-700 justify-center w-10 h-10 bg-gray-700 text-white dark:bg-gray-800 dark:text-white rounded-full">
                                 <!-- Display Initials of the User -->
                                 <span
-                                    class="font-semibold text-lg">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</span>
+                                    class="font-semibold text-lg">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
                             </button>
                             <!-- Dropdown Menu for Logout -->
                             <div id="avatarDropdown"
@@ -184,13 +184,10 @@
             const title = document.getElementById('website-title');
             if (window.scrollY > 50) {
                 navbar.classList.add('shadow-lg', 'border-gray-400/50', 'bg-opacity-70');
-                title.classList.add('scale-110', 'animate-bounce', 'bg-blue-100', 'text-blue-800', 'me-2', 'px-2.5',
-                    'py-0.5', 'rounded', 'dark:bg-blue-900', 'dark:text-blue-300'); // Efek grow pada teks
+                title.classList.add('scale-110', 'animate-bounce'); // Efek grow pada teks
             } else {
                 navbar.classList.remove('shadow-lg', 'border-gray-400/50', 'bg-opacity-50');
-                title.classList.remove('scale-110', 'animate-bounce', 'bg-blue-100', 'text-blue-800', 'me-2',
-                    'px-2.5', 'py-0.5', 'rounded', 'dark:bg-blue-900', 'dark:text-blue-300'
-                ); // Mengembalikan ukuran teks
+                title.classList.remove('scale-110', 'animate-bounce'); // Mengembalikan ukuran teks
             }
         });
 

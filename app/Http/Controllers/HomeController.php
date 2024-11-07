@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -18,16 +19,19 @@ class HomeController extends Controller
 
     public function visiMisi()
     {
-        return view('pages.visi-misi');
+        $profile = Profile::select('visi_misi')->first();
+        return view('pages.visi-misi', ['profile' => $profile]);
     }
 
     public function tujuanSasaran()
     {
-        return view('pages.tujuan-sasaran');
+        $profile = Profile::select('tujuan_sasaran')->first();
+        return view('pages.tujuan-sasaran',['profile'=> $profile]);
     }
 
     public function strukturOrganisasi()
     {
-        return view('pages.struktur-organisasi');
+        $profile = Profile::select('struktur_organisasi')->first();
+        return view('pages.struktur-organisasi', ['profile'=> $profile]);
     }
 }
