@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('pangkat_gol');
             $table->string('jabatan');
-            $table->string('jenis_asn');
+            $table->string('jenis_jabatan');
             $table->foreignId('unit_kerja_id')->nullable()->constrained('unit_kerjas');
             $table->timestamps();
         });

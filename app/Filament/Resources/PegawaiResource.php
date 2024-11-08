@@ -32,22 +32,49 @@ class PegawaiResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('NIP')
+                    ->label('NIP')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('pangkat_gol')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('pangkat_gol')
+                    ->label('Pangkat / Golongan')
+                    ->options([
+                        'IA Juru Muda' => 'IA Juru Muda',
+                        'IB Juru Muda Tingkat 1' => 'IB Juru Muda Tingkat 1',
+                        'IC Juru' => 'IC Juru',
+                        'ID Juru Tingkat 1' => 'ID Juru Tingkat 1',
+                        'IIA Pengatur Muda' => 'IIA Pengatur Muda',
+                        'IIB Pengatur Muda Tingkat 1' => 'IIB Pengatur Muda Tingkat 1',
+                        'IIC Pengatur' => 'IIC Pengatur',
+                        'IID Pengatur Tingkat 1' => 'IID Pengatur Tingkat 1',
+                        'IIIA Penata Muda' => 'IIIA Penata Muda',
+                        'IIIB Penata Muda Tingkat 1' => 'IIIB Penata Muda Tingkat 1',
+                        'IIIC Penata' => 'IIIC Penata',
+                        'IIID Penata Tingkat 1' => 'IIID Penata Tingkat 1',
+                        'IVA Pembina' => 'IVA Pembina',
+                        'IVB Pembina Tingkat 1' => 'IVB Pembina Tingkat 1',
+                        'IVC Pembina Utama Muda' => 'IVC Pembina Utama Muda',
+                        'IVD Pembina Utama Madya' => 'IVD Pembina Utama Madya',
+                        'IVE Pembina Utama' => 'IVE Pembina Utama'
+                    ])
+                    ->required(),
                 Forms\Components\TextInput::make('jabatan')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('jenis_asn')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('unit_kerja_id')
-                    ->numeric()
+                Forms\Components\Select::make('jenis_jabatan')
+                    ->label('Jenis Jabatan')
+                    ->options([
+                        'Jabatan Tinggi Pratama' => 'Jabatan Tinggi Pratama',
+                        'Jabatan Administrator' => 'Jabatan Administrator',
+                        'Jabatan Pengawas' => 'Jabatan Pengawas',
+                        'Jabatan Pelaksana' => 'Jabatan Pelaksana',
+                        'Jabatan Fungsional' => 'Jabatan Fungsional',
+                    ])
+                    ->required(),
+                Forms\Components\Select::make('unit_kerja_id')
+                    ->relationship('unitKerja', 'nama_bidang')
                     ->default(null),
             ]);
     }

@@ -32,6 +32,7 @@ class UnitKerjaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama_bidang')
+                    ->columnSpanFull()
                     ->required()
                     ->maxLength(255),
             ]);
@@ -57,6 +58,7 @@ class UnitKerjaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -65,19 +67,10 @@ class UnitKerjaResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUnitKerjas::route('/'),
-            'create' => Pages\CreateUnitKerja::route('/create'),
-            'edit' => Pages\EditUnitKerja::route('/{record}/edit'),
+            'index' => Pages\ManageUnitKerjas::route('/'),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -33,5 +34,11 @@ class HomeController extends Controller
     {
         $profile = Profile::select('struktur_organisasi')->first();
         return view('pages.struktur-organisasi', ['profile'=> $profile]);
+    }
+
+    public function pegawai()
+    {
+        $pegawai = Pegawai::all();
+        return view('pages.pegawai', ['pegawai'=> $pegawai]);
     }
 }

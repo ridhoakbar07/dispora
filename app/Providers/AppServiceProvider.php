@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Gate;
 use Illuminate\Support\ServiceProvider;
 use TomatoPHP\FilamentUsers\Facades\FilamentUser;
@@ -30,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
         ]);
         Gate::define('viewPulse', function (User $user) {
             return $user->isSuperAdmin();
+        });
+        
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['id','en']); // also accepts a closure
         });
     }
 }
