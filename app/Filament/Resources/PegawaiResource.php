@@ -5,12 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PegawaiResource\Pages;
 use App\Filament\Resources\PegawaiResource\RelationManagers;
 use App\Models\Pegawai;
+use Filament\Actions\EditAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PegawaiResource extends Resource
@@ -38,26 +40,33 @@ class PegawaiResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('jenis_kelamin')
+                    ->label('Jenis Kelamin')
+                    ->options([
+                        'L' => 'Laki - Laki',
+                        'P' => 'Perempuan',
+                    ])
+                    ->required(),
                 Forms\Components\Select::make('pangkat_gol')
                     ->label('Pangkat / Golongan')
                     ->options([
-                        'IA Juru Muda' => 'IA Juru Muda',
-                        'IB Juru Muda Tingkat 1' => 'IB Juru Muda Tingkat 1',
-                        'IC Juru' => 'IC Juru',
-                        'ID Juru Tingkat 1' => 'ID Juru Tingkat 1',
-                        'IIA Pengatur Muda' => 'IIA Pengatur Muda',
-                        'IIB Pengatur Muda Tingkat 1' => 'IIB Pengatur Muda Tingkat 1',
-                        'IIC Pengatur' => 'IIC Pengatur',
-                        'IID Pengatur Tingkat 1' => 'IID Pengatur Tingkat 1',
-                        'IIIA Penata Muda' => 'IIIA Penata Muda',
-                        'IIIB Penata Muda Tingkat 1' => 'IIIB Penata Muda Tingkat 1',
-                        'IIIC Penata' => 'IIIC Penata',
-                        'IIID Penata Tingkat 1' => 'IIID Penata Tingkat 1',
-                        'IVA Pembina' => 'IVA Pembina',
-                        'IVB Pembina Tingkat 1' => 'IVB Pembina Tingkat 1',
-                        'IVC Pembina Utama Muda' => 'IVC Pembina Utama Muda',
-                        'IVD Pembina Utama Madya' => 'IVD Pembina Utama Madya',
-                        'IVE Pembina Utama' => 'IVE Pembina Utama'
+                        'Juru Muda' => 'Juru Muda',
+                        'Juru Muda Tk I' => 'Juru Muda Tk I',
+                        'Juru' => 'Juru',
+                        'Juru Tk I' => 'Juru Tk I',
+                        'IIA Pengatur Muda' => 'Pengatur Muda',
+                        'Pengatur Muda Tk I' => 'Pengatur Muda Tk I',
+                        'Pengatur' => 'Pengatur',
+                        'Pengatur Tk I' => 'Pengatur Tk I',
+                        'Penata Muda' => 'Penata Muda',
+                        'Penata Muda Tk I' => 'Penata Muda Tk I',
+                        'Penata' => 'Penata',
+                        'Penata Tk I' => 'Penata Tk I',
+                        'Pembina' => 'Pembina',
+                        'Pembina Tk I' => 'Pembina Tk I',
+                        'Pembina Utama Muda' => 'Pembina Utama Muda',
+                        'Pembina Utama Madya' => 'Pembina Utama Madya',
+                        'Pembina Utama' => 'Pembina Utama'
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('jabatan')
@@ -73,6 +82,11 @@ class PegawaiResource extends Resource
                         'Jabatan Fungsional' => 'Jabatan Fungsional',
                     ])
                     ->required(),
+                Forms\Components\FileUpload::make('photo')
+                    ->acceptedFileTypes(['image/*'])
+                    ->directory('web_profile/foto_asn')
+                    ->image()
+                    ->imageEditor(),
                 Forms\Components\Select::make('unit_kerja_id')
                     ->relationship('unitKerja', 'nama_bidang')
                     ->default(null),
@@ -91,11 +105,9 @@ class PegawaiResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('jabatan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_asn')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('unit_kerja_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('unitKerja.nama_bidang')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

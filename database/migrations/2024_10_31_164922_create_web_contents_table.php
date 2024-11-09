@@ -22,8 +22,10 @@ return new class extends Migration
             $table->string('NIP');
             $table->string('nama');
             $table->string('pangkat_gol');
+            $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('jabatan');
             $table->string('jenis_jabatan');
+            $table->text('photo')->nullable();
             $table->foreignId('unit_kerja_id')->nullable()->constrained('unit_kerjas');
             $table->timestamps();
         });
@@ -48,7 +50,7 @@ return new class extends Migration
             $table->json(column: 'sosmed')->nullable();
             $table->text('visi_misi')->nullable();
             $table->text('tujuan_sasaran')->nullable();
-            $table->string('struktur_organisasi')->nullable();
+            $table->text('struktur_organisasi')->nullable();
             $table->timestamps();
         });
     }
