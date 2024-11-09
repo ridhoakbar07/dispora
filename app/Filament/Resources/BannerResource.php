@@ -33,22 +33,27 @@ class BannerResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('judul')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
                 Forms\Components\Textarea::make('subjudul')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Textarea::make('gambar')
+                Forms\Components\FileUpload::make('gambar')
                     ->required()
+                    ->acceptedFileTypes(['image/*'])
+                    ->directory('web_profile/banner')
+                    ->image()
+                    ->imageEditor()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('cta')
-                    ->required()
+                    ->label('Call To Action Text')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('link')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('is_aktif')
-                    ->required()
-                    ->numeric(),
+                    ->url()
+                    ->maxLength(255)
+                    ->suffixIcon('heroicon-m-globe-alt'),
+                Forms\Components\Toggle::make('is_aktif')
+                    ->required(),
             ]);
     }
 

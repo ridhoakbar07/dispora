@@ -35,8 +35,8 @@ return new class extends Migration
             $table->string('judul');
             $table->text('subjudul');
             $table->text('gambar');
-            $table->string('cta');
-            $table->string('link');
+            $table->string('cta')->nullable();
+            $table->string('link')->nullable();
             $table->tinyInteger('is_aktif');
             $table->timestamps();
         });

@@ -8,10 +8,10 @@
         <div class="flex flex-col justify-between space-y-3 px-2">
             <div>
                 <h2 title="{{ $post->title }}"
-                    class="group-hover/blog-item:text-primary-700 mb-3 line-clamp-2 text-xl font-semibold hover:text-blue-600">
+                    class="group-hover/blog-item:text-primary-700 mb-3 line-clamp-2 text-xl font-semibold hover:text-blue-600 dark:text-white">
                     {{ $post->title }}
                 </h2>
-                <p class="mb-3 line-clamp-3">
+                <p class="mb-3 line-clamp-3 dark:text-gray-400">
                     {{ Str::limit($post->sub_title, 100) }}
                 </p>
             </div>
@@ -20,9 +20,9 @@
                      src="{{ $post->user->avatar }}" alt="{{ $post->user->name() }}">
                 <div>
                     <span title="{{ $post->user->name() }}"
-                          class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-semibold">{{ $post->user->name() }}</span>
+                          class="block max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-semibold dark:text-white">{{ $post->user->name() }}</span>
                     <span
-                        class="block whitespace-nowrap text-sm font-medium font-semibold text-zinc-600">
+                        class="block whitespace-nowrap text-sm font-medium font-semibold text-zinc-600 dark:text-gray-400">
                                             {{ $post->formattedPublishedDate() }}</span>
                 </div>
             </div>

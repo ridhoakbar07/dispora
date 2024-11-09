@@ -1,5 +1,5 @@
 <nav id="navbar"
-    class="sticky z-10 top-0 top-0 left-0 w-full bg-white bg-opacity-50 backdrop-blur-md shadow-none dark:bg-gray-900/70">
+    class="fixed z-50 top-0 top-0 left-0 w-full bg-white bg-opacity-50 backdrop-blur-md shadow-none dark:bg-gray-900/70">
     <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between border-b border-gray-200 dark:border-gray-700 mx-auto p-4">
 

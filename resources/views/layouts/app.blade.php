@@ -34,7 +34,7 @@
 
 <body class="bg-white dark:bg-gray-900 overscroll-contain flex flex-col min-h-screen">
 
-    <header class="sticky top-0 mb-4">
+    <header class="mb-4">
         @include('layouts.partials.navbar')
     </header>
 

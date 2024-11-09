@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Pegawai;
 use App\Models\Profile;
 use App\Models\UnitKerja;
@@ -12,8 +13,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $post = Post::orderBy('created_at', 'desc')->take(5)->get();
-        return view('pages.home');
+        $post = Post::orderBy('created_at', 'desc')->take(4)->get();
+        $banners = Banner::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('pages.home', ['post' => $post, 'banners' => $banners]);
     }
 
     public function kontakKami()

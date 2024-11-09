@@ -1,7 +1,7 @@
 <x-blog-layout>
     <section class="py-10">
         <header class="container mx-auto px-6">
-            <h3 class="inherits-color text-balance leading-tighter relative z-10 text-3xl font-semibold tracking-tight">
+            <h3 class="inherits-color text-balance leading-tighter relative z-10 text-3xl font-semibold tracking-tight text-gray-700 dark:text-white">
                 Latest News / Blogs
             </h3>
         </header>
@@ -14,7 +14,7 @@
                 @empty
                     <div class="mx-auto col-span-3">
                         <div class="flex items-center justify-center">
-                            <p class="text-2xl font-semibold text-gray-300">No posts found</p>
+                            <p class="text-2xl font-semibold text-gray-300 text-gray-700 dark:text-white">No posts found</p>
                         </div>
                     </div>
                 @endforelse
