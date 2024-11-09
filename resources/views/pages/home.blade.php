@@ -30,10 +30,10 @@
     </section> --}}
 
     {{-- Banner Section --}}
-    <section class="bg-white dark:bg-gray-900 my-4 lg:my-12 ">
-        <div id="controls-carousel" class="relative max-w-screen-xl mx-auto" data-carousel="static">
+    <section class="bg-white dark:bg-gray-900 py-4 lg:py-36 h-auto">
+        <div id="controls-carousel" class="relative max-w-screen-xl mx-auto " data-carousel="static">
             <!-- Carousel wrapper -->
-            <div class="relative h-96 mt-20 lg:mt-0 lg:h-screen overflow-hidden rounded-lg">
+            <div class="relative h-96 mt-20 lg:h-100 overflow-hidden rounded-lg">
                 @foreach ($banners as $banner)
                     <div class="hidden duration-700 px-8 lg:px-36 ease-in-out flex items-center" data-carousel-item>
                         <!-- Content Area (Left Side) -->
@@ -83,40 +83,36 @@
                 </span>
             </button>
         </div>
-    </section>
 
-    {{-- Logo Section --}}
-    <section class="bg-white dark:bg-gray-900 my-4 lg:my-20 py-4 lg:py-8">
-        <div class="py-6 lg:py-8 mx-auto max-w-screen-xl px-4 flex justify-center items-center">
-            <div class="text-center">
-                <h2 class="mb-12 lg:mb-18 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                    <span
-                        class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">Branding
-                        Kami</span>
-                </h2>
-                <div class="grid grid-cols-3 gap-8 text-gray-500 sm:gap-1 dark:text-gray-400">
-                    <div class="flex justify-center items-center">
-                        <img src="{{ asset('storage/images/kalsel_hitam.png') }}" class="mr-3 h-8 lg:h-12 dark:hidden"
-                            alt="Pemprov Kalsel" />
-                        <img src="{{ asset('storage/images/kalsel_putih.png') }}" class="mr-3 h-8 lg:h-12 hidden dark:block"
-                            alt="Pemprov Kalsel" />
-                    </div>
-                    <div class="flex justify-center items-center">
-                        <img src="{{ asset('storage/images/ASN_hitam.png') }}" class="mr-3 h-8 lg:h-12 dark:hidden"
-                            alt="ASN" />
-                        <img src="{{ asset('storage/images/ASN_putih.png') }}" class="mr-3 h-8 lg:h-12 hidden dark:block"
-                            alt="ASN" />
-                    </div>
-                    <div class="flex justify-center items-center">
-                        <img src="{{ asset('storage/images/Berakhlak_hitam.png') }}" class="mr-3 h-8 lg:h-12 dark:hidden"
-                            alt="Berakhlak" />
-                        <img src="{{ asset('storage/images/Berakhlak_putih.png') }}"
-                            class="mr-3 h-8 lg:h-12 hidden dark:block" alt="Berakhlak" />
+        <section class="bg-white dark:bg-gray-900 my-4 lg:my-10 py-4 lg:py-6">
+            <div class="py-6 lg:py-8 mx-auto max-w-screen-xl px-4 flex justify-center items-center">
+                    <div class="grid grid-cols-3 gap-8 text-gray-500 sm:gap-1 dark:text-gray-400">
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset('storage/images/kalsel_hitam.png') }}" class="mr-3 h-8 lg:h-12 dark:hidden"
+                                alt="Pemprov Kalsel" />
+                            <img src="{{ asset('storage/images/kalsel_putih.png') }}"
+                                class="mr-3 h-8 lg:h-12 hidden dark:block" alt="Pemprov Kalsel" />
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset('storage/images/ASN_hitam.png') }}" class="mr-3 h-8 lg:h-12 dark:hidden"
+                                alt="ASN" />
+                            <img src="{{ asset('storage/images/ASN_putih.png') }}"
+                                class="mr-3 h-8 lg:h-12 hidden dark:block" alt="ASN" />
+                        </div>
+                        <div class="flex justify-center items-center">
+                            <img src="{{ asset('storage/images/Berakhlak_hitam.png') }}"
+                                class="mr-3 h-8 lg:h-12 dark:hidden" alt="Berakhlak" />
+                            <img src="{{ asset('storage/images/Berakhlak_putih.png') }}"
+                                class="mr-3 h-8 lg:h-12 hidden dark:block" alt="Berakhlak" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
+
+    {{-- Logo Section --}}
+
 
     {{-- Blog Section --}}
     <section class="bg-white dark:bg-gray-900">
