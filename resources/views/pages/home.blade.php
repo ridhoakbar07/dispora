@@ -4,7 +4,7 @@
 <section
     class="backdrop-blur-sm backdrop-grayscale backdrop-saturate-200 h-screen flex flex-col justify-center items-center">
     <div
-        class="bg-gradient-to-b from-purple-400 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0 z-0">
+        class="bg-gradient-to-b from-blue-400 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0 z-0">
     </div>
     <div class="container mx-auto my-auto">
         <div id="controls-carousel" class="relative max-w-screen-xl mx-auto h-vh" data-carousel="slide">
