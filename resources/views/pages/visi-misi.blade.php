@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-white dark:bg-gray-900 pb-6 flex items-center justify-center h-auto">
+    <section class="pt-12 bg-white dark:bg-gray-900 pb-6 flex items-center justify-center h-auto">
         <div class="text-center max-w-screen-xl mx-auto p-4">
-            <p class="mt-4 mb-4 md:mt-8 md:mb-4 text-xl font-bold text-center dark:text-white">
+            <p class="mb-4 md:mb-4 text-md lg:text-2xl font-bold text-center dark:text-white">
                 Berdasarkan Perubahan Rencana Pembangunan Jangka Menengah Daerah (RPJMD) Provinsi Kalimantan Selatan Tahun
                 2021 - 2026,
                 Visi dan Misi Gubernur dan Wakil Gubernur adalah :
