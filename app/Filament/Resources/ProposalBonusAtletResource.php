@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn\IconColumnSize;
 use Filament\Tables\Table;
+use Hugomyb\FilamentMediaAction\Tables\Actions\MediaAction;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -53,14 +55,11 @@ class ProposalBonusAtletResource extends Resource
                             ->prefixIcon('heroicon-m-envelope')
                             ->maxLength(255),
                         Forms\Components\FileUpload::make('ktp')
-                            ->acceptedFileTypes(['image/*'])
-                            ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('ktp-'),
-                            )
+                            ->label('KTP')
+                            ->acceptedFileTypes(['image/*', 'application/pdf'])
                             ->directory(fn(): string => 'proposal/bonus_atlet/' . auth()->user()->name)
-                            ->minSize(512)
-                            ->maxSize(1024)
+                            ->minSize(100)
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
@@ -77,33 +76,22 @@ class ProposalBonusAtletResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\FileUpload::make('sk_pengprov')
-                            ->acceptedFileTypes(['application/pdf'])
-                            ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('sk-pengprov-'),
-                            )
+                            ->acceptedFileTypes(['image/*', 'application/pdf'])
                             ->directory(fn(): string => 'proposal/bonus_atlet/' . auth()->user()->name)
-                            ->minSize(512)
-                            ->maxSize(1024)
+                            ->minSize(100)
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('piagam')
-                            ->acceptedFileTypes(['application/pdf'])
-                            ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('piagam-'),
-                            )
+                            ->acceptedFileTypes(['image/*', 'application/pdf'])
                             ->directory(fn(): string => 'proposal/bonus_atlet/' . auth()->user()->name)
-                            ->minSize(512)
-                            ->maxSize(1024)
+                            ->minSize(size: 100)
+                            ->maxSize(2048)
                             ->columnSpanFull(),
                         Forms\Components\FileUpload::make('foto_medali')
-                            ->acceptedFileTypes(['image/*'])
-                            ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('foto-medali-'),
-                            )
+                            ->acceptedFileTypes(['image/*', 'application/pdf'])
                             ->directory(fn(): string => 'proposal/bonus_atlet/' . auth()->user()->name)
-                            ->image()
+                            ->minSize(size: 100)
+                            ->maxSize(2048)
                             ->imageEditor()
                             ->columnSpanFull(),
                     ])
@@ -117,13 +105,9 @@ class ProposalBonusAtletResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\FileUpload::make('buku_tabungan')
-                            ->acceptedFileTypes(['application/pdf'])
-                            ->getUploadedFileNameForStorageUsing(
-                                fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
-                                    ->prepend('buku-tabungan-'),
-                            )
+                            ->acceptedFileTypes(['image/*', 'application/pdf'])
                             ->directory(fn(): string => 'proposal/bonus_atlet/' . auth()->user()->name)
-                            ->minSize(512)
+                            ->minSize(100)
                             ->maxSize(1024)
                             ->columnSpanFull(),
                     ])
@@ -132,7 +116,8 @@ class ProposalBonusAtletResource extends Resource
                 Forms\Components\Fieldset::make('Admin Control')
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'name'),
+                            ->relationship('user', 'name')
+                            ->required(),
                         Forms\Components\Textarea::make('keterangan')
                             ->required()
                             ->maxLength(255)
@@ -179,43 +164,48 @@ class ProposalBonusAtletResource extends Resource
                     ->color(fn(string $state): string => empty ($state) ? 'danger' : 'success')
                     ->size(IconColumnSize::TwoExtraLarge)
                     ->alignCenter()
-                    ->action(function (array $data, $record): void {
-
-                    }),
+                    ->action(
+                        MediaAction::make('lampiran_ktp')
+                            ->media(fn($record) => asset("storage/$record->ktp")),
+                    ),
                 Tables\Columns\IconColumn::make('sk_pengprov')
                     ->label('SK Pengprov')
                     ->icon(fn(string $state): string => empty ($state) ? 'heroicon-o-x-circle' : 'heroicon-o-check-badge')
                     ->color(fn(string $state): string => empty ($state) ? 'danger' : 'success')
                     ->size(IconColumnSize::TwoExtraLarge)
                     ->alignCenter()
-                    ->action(function (array $data, $record): void {
-
-                    }),
+                    ->action(
+                        MediaAction::make('lampiran_sk')
+                            ->media(fn($record) => asset("storage/$record->sk_pengprov")),
+                    ),
                 Tables\Columns\IconColumn::make('piagam')
                     ->icon(fn(string $state): string => empty ($state) ? 'heroicon-o-x-circle' : 'heroicon-o-check-badge')
                     ->color(fn(string $state): string => empty ($state) ? 'danger' : 'success')
                     ->size(IconColumnSize::TwoExtraLarge)
                     ->alignCenter()
-                    ->action(function (array $data, $record): void {
-
-                    }),
+                    ->action(
+                        MediaAction::make('lampiran_piagam')
+                            ->media(fn($record) => asset("storage/$record->piagam")),
+                    ),
                 Tables\Columns\IconColumn::make('foto_medali')
                     ->label('Bukti Medali')
                     ->icon(fn(string $state): string => empty ($state) ? 'heroicon-o-x-circle' : 'heroicon-o-check-badge')
                     ->color(fn(string $state): string => empty ($state) ? 'danger' : 'success')
                     ->size(IconColumnSize::TwoExtraLarge)
                     ->alignCenter()
-                    ->action(function (array $data, $record): void {
-
-                    }),
+                    ->action(
+                        MediaAction::make('lampiran_foto_medali')
+                            ->media(fn($record) => asset("storage/$record->foto_medali")),
+                    ),
                 Tables\Columns\IconColumn::make('buku_tabungan')
                     ->icon(fn(string $state): string => empty ($state) ? 'heroicon-o-x-circle' : 'heroicon-o-check-badge')
                     ->color(fn(string $state): string => empty ($state) ? 'danger' : 'success')
                     ->size(IconColumnSize::TwoExtraLarge)
                     ->alignCenter()
-                    ->action(function (array $data, $record): void {
-
-                    }),
+                    ->action(
+                        MediaAction::make('lampiran_buku_tabungan')
+                            ->media(fn($record) => asset("storage/$record->buku_tabungan")),
+                    ),
                 Tables\Columns\ToggleColumn::make('validasi'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

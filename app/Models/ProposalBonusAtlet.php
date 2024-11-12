@@ -13,6 +13,7 @@ class ProposalBonusAtlet extends Model
         'nama',
         'telp',
         'email',
+        'ktp',
         'no_piagam',
         'nama_kejuaraan',
         'kelas_cabor',
