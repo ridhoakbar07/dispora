@@ -35,27 +35,32 @@
                 </svg>
             </button>
 
-            @if (Route::has('filament.admin.auth.login'))
+            @if (auth())
                 <nav class="mx-3 flex flex-1 justify-end">
                     @auth
                         <div class="relative">
                             <button id="avatarDropdownLink" data-dropdown-toggle="avatarDropdown"
                                 class="flex items-center border-2 border-gray-700 justify-center w-10 h-10 bg-gray-700 text-white dark:bg-gray-800 dark:text-white rounded-full">
                                 <!-- Display Initials of the User -->
-                                <span
-                                    class="font-semibold text-lg">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
+                                <span class="font-semibold text-lg">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
                             </button>
                             <!-- Dropdown Menu for Logout -->
                             <div id="avatarDropdown"
                                 class="z-10 hidden absolute right-2 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                    aria-labelledby="avatarDropdownLink">
+                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarDropdownLink">
                                     <li>
-                                        <form action="{{ route('filament.admin.auth.logout') }}" method="POST"
-                                            class="inline">
+                                        <a href="{{ route(auth()->user()->id == 1 ? 'filament.admin.pages.dashboard' : 'filament.user.pages.dashboard') }}"
+                                            class="block px-4 py-2 text-blue-600 hover:text-blue-100 hover:bg-blue-600 dark:hover:bg-blue-600 dark:hover:text-white">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <form
+                                            action="{{ route(auth()->user()->id == 1 ? 'filament.admin.auth.logout' : 'filament.user.auth.logout') }}"
+                                            method="POST" class="inline">
                                             @csrf <!-- CSRF protection is necessary for POST requests -->
                                             <a href="javascript:void(0);" onclick="this.closest('form').submit()"
-                                                class="block px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                class="block px-4 py-2 text-red-600 hover:text-red-100 hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white">
                                                 Logout
                                             </a>
                                         </form>
@@ -64,13 +69,13 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('filament.admin.auth.login') }}"
+                        <a href="{{ route('filament.user.auth.login') }}"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden sm:block">Login</a>
 
-                        @if (Route::has('filament.admin.auth.register'))
-                            <a href="{{ route('filament.admin.auth.login') }}"
+                        <!-- @if (Route::has('filament.user.auth.register'))
+                            <a href="{{ route('filament.user.auth.login') }}"
                                 class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 hidden sm:block">Register</a>
-                        @endif
+                        @endif -->
                     @endauth
                 </nav>
             @endif
@@ -129,8 +134,7 @@
                     <!-- Dropdown menu -->
                     <div id="transparansiDropdown"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownLargeButton">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
                             <li>
                                 <a href="#"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Produk
@@ -149,16 +153,15 @@
                         class="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Layanan
                         <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 4 4 4-4" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
                         </svg></button>
                     <!-- Dropdown menu -->
                     <div id="layananDropdown"
                         class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownLargeButton">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="/sispora" target="_BLANK"
+                                <a href="{{ route('filament.user.auth.login') }}"
                                     class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">SISPORA
                                 </a>
                             </li>
@@ -182,7 +185,7 @@
 @push('scripts')
     <script>
         // JavaScript untuk menambahkan kelas saat di-scroll
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
             const logo = navbar.querySelector('img');
             const title = document.getElementById('website-title');
@@ -196,7 +199,7 @@
         });
 
         // JavaScript untuk toggle menu mobile
-        document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('menu-toggle').addEventListener('click', function () {
             const menu = document.querySelector('.md\\:flex');
             menu.classList.toggle('hidden');
         });

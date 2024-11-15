@@ -210,6 +210,12 @@ class ProposalBonusAtletResource extends Resource
                         MediaAction::make('lampiran_buku_tabungan')
                             ->media(fn($record) => asset("storage/$record->buku_tabungan")),
                     ),
+                Tables\Columns\IconColumn::make('validasi')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-document-check')
+                    ->falseIcon('heroicon-o-x-mark'),
+                Tables\Columns\TextColumn::make('keterangan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

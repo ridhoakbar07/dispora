@@ -206,7 +206,6 @@ class ProposalBonusAtletResource extends Resource
                         MediaAction::make('lampiran_buku_tabungan')
                             ->media(fn($record) => asset("storage/$record->buku_tabungan")),
                     ),
-                Tables\Columns\ToggleColumn::make('validasi'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -220,6 +219,29 @@ class ProposalBonusAtletResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('validasi_proposal')
+                    ->fillForm(fn($record): array => [
+                        'keterangan' => $record->keterangan ?? null,
+                        'validasi' => $record->validasi ?? 0,
+                    ])
+                    ->form([
+                        Forms\Components\Textarea::make('keterangan')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('validasi'),
+                    ])
+                    ->action(function (array $data, $record): void {
+                        if ($record->update($data)) {
+                            Notification::make()
+                                ->success()
+                                ->title('Sukses')
+                                ->body('Profile berhasil diperbarui')
+                                ->send();
+                        }
+                    })
+                    ->icon('heroicon-m-document-check')
+                    ->color('success'),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Firefly\FilamentBlog\Traits\HasBlog;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, HasPanelShield, HasBlog;
@@ -61,6 +63,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         // your conditional logic here
         return false;
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return auth()->user()->id == 1;
+        }
+
+        if ($panel->getId() === 'user') {
+            $users = User::role('panel_user')->pluck('id')->toArray();
+            return in_array(auth()->user()->id, $users);
+        }
+
+        return true;
     }
 
     public function proposal(): BelongsToMany
