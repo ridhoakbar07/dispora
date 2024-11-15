@@ -47,7 +47,14 @@ class ProfileResource extends Resource
                     ->email()
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\KeyValue::make('sosmed')
+                Forms\Components\Repeater::make('sosmed')
+                    ->schema([
+                        Forms\Components\TextInput::make('nama')->required(),
+                        Forms\Components\TextInput::make('url')->required(),
+                        Forms\Components\TextArea::make('icon-svg')->required(),
+                    ])
+                    ->columns(3)
+                    ->helperText("Gunakan Flowbite Icons : https://flowbite.com/icons/")
                     ->columnSpanFull(),
                 Forms\Components\MarkdownEditor::make('visi_misi')
                     ->toolbarButtons([
@@ -81,6 +88,22 @@ class ProfileResource extends Resource
                         'table',
                         'undo',
                     ]),
+                Forms\Components\MarkdownEditor::make('sasaran_strategis')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'heading',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'table',
+                        'undo',
+                    ]),
                 Forms\Components\FileUpload::make('struktur_organisasi')
                     ->acceptedFileTypes(['image/*'])
                     // ->hint('Max height 400')
@@ -88,8 +111,7 @@ class ProfileResource extends Resource
                     // ->maxSize(1024 * 1024 * 2)
                     // ->rules('dimensions:max_height=400')
                     ->image()
-                    ->imageEditor()
-                    ->columnSpanFull(),
+                    ->imageEditor(),
             ]);
     }
 
@@ -132,7 +154,7 @@ class ProfileResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make()
-                ->modalWidth(MaxWidth::FiveExtraLarge),
+                    ->modalWidth(MaxWidth::FiveExtraLarge),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

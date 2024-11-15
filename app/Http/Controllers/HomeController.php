@@ -13,10 +13,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $post = Post::orderBy('published_at', 'asc')->take(4)->get();
+        $posts = Post::orderBy('published_at', 'asc')->take(4)->get();
+        $events = Post::whereRelation('categories', 'name', '=', "Event")->orderBy('scheduled_for', 'asc')->take(5)->get();
+        $pengumumans = Post::whereRelation('categories', 'name', '=', "Pengumuman")->orderBy('published_at', 'asc')->take(5)->get();
         $banners = Banner::orderBy('created_at', 'asc')->take(5)->get();
 
-        return view('pages.home', ['post' => $post, 'banners' => $banners]);
+        return view('pages.home', ['posts' => $posts, 'banners' => $banners, 'events' => $events, 'pengumumans' => $pengumumans]);
     }
 
     public function kontakKami()
